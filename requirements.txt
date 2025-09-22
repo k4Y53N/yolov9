@@ -22,7 +22,7 @@ tqdm>=4.64.0
 onnx<1.19.0
 onnxruntime-gpu<1.19.0
 onnx-simplifier
-onnxconverter-common
+onnxconverter-common==1.14.0
 
 # Logging ---------------------------------------------------------------------
 tensorboard>=2.4.1
