@@ -18,6 +18,5 @@ x-general: &general
 services:
   cmd:
     <<: *general
-    image: yolov9
     container_name: yolov9-cmd
     entrypoint: ["tail", "-f", "/dev/null"]
