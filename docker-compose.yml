@@ -1,20 +1,23 @@
+x-general: &general
+  image: yolov9
+  build:
+    context: .
+    dockerfile: Dockerfile
+  entrypoint: ["tail", "-f", "/dev/null"]
+  volumes:
+    - ./:/yolov9:rw
+    - ./datasets:/yolov9/datasets:rw
+  shm_size: "8gb"
+  deploy:
+    resources:
+      reservations:
+        devices:
+          - driver: nvidia
+            capabilities: [gpu]
+
 services:
-  yolo:
+  cmd:
+    <<: *general
     image: yolov9
-    container_name: yolov9
-    build:
-      context: .
-      dockerfile: Dockerfile
-    # entrypoint: [ "sh", "train.sh" ]
-    entrypoint: [ "tail", "-f", "/dev/null" ]
-    volumes:
-      - ./:/yolov9:rw
-      - ./datasets:/yolov9/datasets:rw
-    shm_size: '8gb'
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [ gpu ]
+    container_name: yolov9-cmd
+    entrypoint: ["tail", "-f", "/dev/null"]
